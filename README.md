@@ -1,46 +1,138 @@
-# Sentiment-Fused-GAN-Stock-Forecasting
+# Stock Price Forecasting using Sentiment and Deep Learning Models
 
-This project develops a Sentiment-Enhanced GAN for multi-horizon stock market forecasting. By combining financial sentiment analysis with technical market data, the model aims to predict future stock prices with improved accuracy and interpretability.
+This project explores the impact of news sentiment on stock price prediction using advanced deep learning architectures including GRU, GAN, and WGAN-GP. The entire workflow is implemented across multiple Jupyter Notebooks with clearly defined stages for data preparation, sentiment analysis, merging, and model training.
 
-## Project Overview
+---
 
-The core idea behind this project is to fuse sentiment data derived from financial news and earnings calls with technical indicators (like stock price, volume, RSI, and MACD) in order to make more accurate multi-horizon predictions for stock prices.
+## 📁 Project Workflow
 
-## Key Components:
+### 1. **Data Importing**
 
-1. **Sentiment Analysis with FinBERT**:
+**Notebook**: `Importing_dataset.ipynb`
 
-   - Extract nuanced sentiment from financial news articles using [FinBERT](https://arxiv.org/abs/2006.07538).
-   - This helps us to understand the market mood, which can influence stock price movements.
+- Stock price and news datasets are imported and stored in the `Data/` directory.
 
-2. **WGAN-GP for Time Series**:
+---
 
-   - The model uses a **Wasserstein GAN with Gradient Penalty** (WGAN-GP) for stable training of GANs on time-series data.
-   - The GAN will generate synthetic data to augment the training dataset for the model.
+### 2. **Data Preprocessing**
 
-3. **Cross-Attention Fusion**:
+**Notebook**: `data_preprocessing.ipynb`
 
-   - Align sentiment data (from news articles) and technical indicators using a **Cross-Attention Module**.
-   - This approach allows for more effective fusion compared to traditional concatenation.
+- Preprocessing is performed on both sentiment and stock price datasets.
+- Cleaned and structured data is stored back into the `Data/` directory.
 
-4. **Temporal Fusion Transformer (TFT)**:
-   - The TFT model is employed for **multi-horizon forecasting** (1-day, 7-day, 30-day stock price predictions).
+---
 
-## Data Sources:
+### 3. **Sentiment Analysis**
 
-1. **Stock Market Data**:
+**Notebook**: `Sentiment_Analysis_using_Finbert.ipynb`
 
-   - Daily stock data (including open, high, low, close, volume, etc.) for the top 5 Indian companies is fetched using the [Alpha Vantage API](https://www.alphavantage.co/).
-   - The data is filtered for the period from January 2020 to December 2024.
+- Sentiment scores are computed from the news data using FinBERT.
+- The results are stored in the `Data/` directory for further use.
 
-2. **News Data**:
-   - News headlines related to the top 5 companies are fetched from [Google News RSS feeds](https://news.google.com/news/rss).
-   - Data includes headlines for each month between 2020 and 2024, which are used for sentiment analysis.
+---
 
-## Data Collection:
+### 4. **Combining Sentiment and Price Data**
 
-- **Stock Data**: The stock data for the top 5 companies (Reliance Industries, TCS, HDFC Bank, Infosys, and ICICI Bank) is fetched using Alpha Vantage API.
-- **News Data**: News headlines are fetched month by month using Google News RSS for the same set of companies.
+**Notebook**: `News_and_stock_price_data_combined.ipynb`
+
+- Sentiment scores are merged with stock prices.
+- The combined dataset is saved in `Data/`.
+- Training and testing datasets are prepared and saved as `.npy` files in the `Model_train_data/` directory.
+
+---
+
+## 🧠 Model Training
+
+### 5. **GRU Model**
+
+**Notebook**: `GRU.ipynb`
+
+- GRU model is trained using the combined dataset.
+- Training loss is stored in the `Training_loss/` directory.
+- The trained model is saved in the `Model/` directory.
+
+---
+
+### 6. **GAN Model**
+
+**Notebook**: `GAN.ipynb`
+
+- GAN model is trained on the prepared dataset.
+- Losses and outputs are saved in `Training_loss/` and the model is stored in `Model/`.
+
+---
+
+### 7. **WGAN-GP Model**
+
+**Notebook**: `WGAN_GP.ipynb`
+
+- WGAN-GP model is trained similarly.
+- Training results are saved in `Training_loss/`, and the model is saved in `Model/`.
+
+---
+
+## 🛠️ Libraries & Dependencies
+
+To be filled in later...
+
+```bash
+# === Data Handling and Manipulation ===
+- pandas
+- numpy
+- os
+- csv
+- datetime
+
+# === Plotting and Visualization ===
+- matplotlib.pyplot
+- matplotlib.dates.DateFormatter
+- pyplot
+
+# === Machine Learning & Deep Learning Libraries ===
+- torch
+- tensorflow
+- tensorflow.keras.models.Sequential
+- tensorflow.keras.models.load_model
+- tensorflow.keras.layers.Dense
+- tensorflow.keras.layers.Dropout
+- tensorflow.keras.layers.Bidirectional
+- tensorflow.keras.layers.BatchNormalization
+- tensorflow.keras.layers.Embedding
+- tensorflow.keras.layers.TimeDistributed
+- tensorflow.keras.layers.LeakyReLU
+- tensorflow.keras.layers.GRU
+- tensorflow.keras.layers.LSTM
+- tensorflow.keras.layers.Flatten
+- tensorflow.keras.layers.Conv1D
+- tensorflow.keras.layers.ELU
+- tensorflow.keras.layers.ReLU
+- tensorflow.keras.optimizers.Adam
+- tensorflow.keras.regularizers
+- tensorflow.keras.losses.mean_squared_error
+- tensorflow.python.client.device_lib
+
+# === Scikit-Learn Utilities ===
+- sklearn.preprocessing.LabelEncoder
+- sklearn.preprocessing.MinMaxScaler
+- sklearn.preprocessing.OneHotEncoder
+- sklearn.metrics.mean_squared_error
+
+# === Transformers and NLP ===
+- transformers.AutoTokenizer
+- transformers.AutoModelForSequenceClassification
+
+# === Progress Display ===
+- tqdm
+- trange
+
+# === Serialization ===
+- pickle (load, dump)
+
+# === External Data Sources ===
+- alpha_vantage.timeseries.TimeSeries
+- feedparser
+```
 
 ## References:
 
