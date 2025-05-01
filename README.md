@@ -63,13 +63,6 @@ This project explores the impact of news sentiment on stock price prediction usi
 
 ---
 
-### 7. **WGAN-GP Model**
-
-**Notebook**: `WGAN_GP.ipynb`
-
-- WGAN-GP model is trained similarly.
-- Training results are saved in `Training_loss/`, and the model is saved in `Model/`.
-
 ---
 
 ## 🛠️ Libraries & Dependencies
@@ -137,3 +130,5 @@ To be filled in later...
 ## References:
 
 Lin, H., Chen, C., Huang, G. & Jafari, A. (2021). Stock price prediction using Generative Adversarial Networks. Journal of Computer Science, 17(3), 188-196. https://doi.org/10.3844/jcssp.2021.188.196
+
+[MCASP: Multi-Modal Cross Attention Network for Stock Market Prediction](https://aclanthology.org/2023.alta-1.7/) (Fataliyev & Liu, ALTA 2023)
